@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #edf3f7;
+  background: #0d1923;
+}
+body { margin: 0; }
+.skywatcher-app {
+  min-height: 100dvh;
+  padding: clamp(16px, 2vw, 48px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 1.5vw, 32px);
+}
+.display-header, .display-brand, .display-controls, .location-control, .radar-status {
+  display: flex;
+  align-items: center;
+}
+.display-header { justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.display-brand { gap: 12px; }
+.display-brand svg { width: clamp(26px, 2vw, 44px); color: #9cd5e8; }
+.display-brand h1 { font-size: clamp(18px, 1.5vw, 32px); letter-spacing: .16em; font-weight: 700; }
+.display-controls { gap: clamp(16px, 2.5vw, 48px); flex-wrap: wrap; }
+.radar-status { gap: 9px; color: #b6c9d6; font-size: clamp(12px, 1vw, 22px); }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: #8bd6b1; }
+.status-error { color: #fda4af; }
+.status-error .status-dot { background: #fda4af; }
+.status-loading .status-dot { background: #fcd68b; }
+.location-control { gap: 10px; font-size: clamp(13px, 1.1vw, 24px); }
+.location-control label { color: #a2b8c7; }
+.location-control select {
+  max-width: 100%; padding: 7px 10px; border: 1px solid #3a5264;
+  border-radius: 6px; background: #1b2c39; color: #edf3f7; cursor: pointer;
+}
+.location-control select:focus-visible { outline: 2px solid #9cd5e8; outline-offset: 4px; }
+.display-content { display: flex; flex: 1; min-height: 0; align-items: center; justify-content: center; }
+.flight-display {
+  width: 100%; overflow: hidden; border: 1px solid #354b5c; border-radius: 16px;
+  background: #172936; display: flex; flex-direction: column;
+  box-shadow: 0 16px 48px #0003;
+}
+.aircraft-photo { position: relative; min-height: 330px; flex: 1; overflow: hidden; background: #203646; }
+.aircraft-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(30px); transform: scale(1.08); opacity: .35; }
+.aircraft-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.photo-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(0deg, #0c1925f2, #0c192520 42%, transparent 65%); }
+.aircraft-registration {
+  position: absolute; top: clamp(16px, 1.5vw, 32px); left: clamp(16px, 1.8vw, 36px);
+  padding: 6px 12px; border: 1px solid #adc3d44d; border-radius: 6px;
+  background: #102330d9; font-size: clamp(14px, 1.2vw, 26px); font-family: monospace;
+}
+.aircraft-identity { position: absolute; left: clamp(18px, 2vw, 44px); right: 18px; bottom: clamp(18px, 2vw, 42px); }
+.eyebrow { font-size: clamp(11px, 1vw, 22px); letter-spacing: .16em; text-transform: uppercase; color: #b5d4e3; }
+.aircraft-identity h2 { font-size: clamp(36px, 3.7vw, 80px); font-weight: 700; line-height: 1.2; letter-spacing: .025em; overflow-wrap: anywhere; }
+.aircraft-type { margin-top: 3px; font-size: clamp(16px, 1.45vw, 32px); color: #d0dfe8; }
+.aircraft-type span { color: #b6c9d6; }
+.photo-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: #b6c9d6; padding-bottom: 90px; }
+.photo-placeholder svg { width: clamp(48px, 6vw, 120px); opacity: .65; }
+.photo-placeholder p { font-size: clamp(14px, 1.2vw, 24px); }
+.flight-information { padding: clamp(18px, 1.6vw, 36px) clamp(18px, 2vw, 44px); display: grid; grid-template-columns: minmax(0, 1fr) clamp(120px, 12vw, 240px); gap: clamp(20px, 3vw, 64px); align-items: center; }
+.flight-details { min-width: 0; }
+.route-name { font-size: clamp(18px, 1.6vw, 36px); font-weight: 500; overflow-wrap: anywhere; }
+.route-caption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; margin: 8px 0; color: #b6c9d6; font-size: clamp(11px, .95vw, 21px); }
+.route-progress { height: 3px; background: #3a5264; border-radius: 8px; overflow: hidden; }
+.route-progress > div { height: 100%; background: #9cd5e8; border-radius: inherit; transition: width 1s ease-out; }
+.flight-stats { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr)); margin-top: clamp(16px, 1.3vw, 28px); gap: 16px; }
+.flight-stats dt { font-size: clamp(11px, 1vw, 22px); color: #b6c9d6; margin-bottom: 3px; }
+.flight-stats dd { font-size: clamp(24px, 2.3vw, 50px); font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.15; }
+.flight-stats dd span { font-size: .5em; font-weight: 400; color: #b6c9d6; }
+.flight-stats .altitude-value { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.flight-stats .altitude-metres { white-space: nowrap; }
+.secondary-stats { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 14px; font-size: clamp(11px, .9vw, 20px); color: #a2b8c7; }
+.secondary-stats strong { color: #d0dfe8; font-weight: 500; margin-left: 5px; }
+.flight-radar { border-left: 1px solid #354b5c; padding-left: clamp(16px, 2vw, 44px); }
+.radar-label { display: block; text-align: center; font-size: clamp(10px, .85vw, 20px); color: #b6c9d6; margin-bottom: 6px; }
+.radar-drawing { width: 100%; aspect-ratio: 1; }
+.flight-emergency { border-color: #fb7185; }
+.emergency-banner { background: #9f1239; padding: 10px 20px; font-size: clamp(16px, 1.5vw, 32px); text-align: center; font-weight: 700; }
+.secondary-stats .emergency-value, .secondary-stats .emergency-value strong { color: #fda4af; }
+@media (min-width: 900px) and (min-height: 500px) {
+  .skywatcher-app { height: 100dvh; }
+  .flight-display { height: 100%; }
+  .aircraft-photo { min-height: 160px; }
+  .aircraft-image { object-fit: cover; object-position: center; }
+}
+@media (max-width: 599px) {
+  .display-controls { width: 100%; justify-content: space-between; gap: 12px; }
+  .location-control { gap: 6px; }
+  .flight-information { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .flight-radar { width: 150px; border-left: 0; padding-left: 0; justify-self: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+.location-notice { margin-top: 12px; color: #fcd68b; font-size: clamp(13px, 1vw, 22px); }
+.location-notice button { color: #edf3f7; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.location-notice button:focus-visible { outline: 2px solid #9cd5e8; outline-offset: 4px; }
+
+.data-credit { color: #a2b8c7; font-size: 12px; flex-shrink: 0; }
+.data-credit a { color: #c4e8f4; text-decoration: underline; text-underline-offset: 3px; }
+.data-credit a:focus-visible { outline: 2px solid #9cd5e8; outline-offset: 4px; }
